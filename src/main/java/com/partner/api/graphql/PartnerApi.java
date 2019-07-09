@@ -1,5 +1,6 @@
 package com.partner.api.graphql;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.partner.api.domain.dto.PartnerDTO;
@@ -26,8 +27,13 @@ public class PartnerApi {
 	}
 	
 	@GraphQLQuery(name = "pdv")
-	public Optional<PartnerDTO> findById(@GraphQLArgument(name = "id") String id) {
+	public PartnerDTO findById(@GraphQLArgument(name = "id") String id) {
 		return partnerService.findById(id);
+	}
+
+	@GraphQLQuery(name = "pdvs")
+	public List<PartnerDTO> searchPdv(@GraphQLArgument(name = "lng") double lng, @GraphQLArgument(name = "lat") double lat) {
+		return partnerService.findByAddressNear(lng, lat);
 	}
 
 	@GraphQLMutation(name = "createPdv")
