@@ -17,12 +17,14 @@ public class ModelMapperConfig {
             @Override
             protected void configure() {
                 map().convertAddress(source.getAddress());
+                map().convertCoverageArea(source.getCoverageArea());
             }
         });
         modelMapper.addMappings(new PropertyMap<PartnerDTO, Partner>() {
             @Override
             protected void configure() {
                 map().convertAddress(source.getAddress());
+                map().convertCoverageArea(source.getCoverageArea());
             }
         });
         return modelMapper;

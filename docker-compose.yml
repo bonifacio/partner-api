@@ -6,7 +6,7 @@ services:
     ports: 
       - 27017:27017
     volumes: 
-      - /tmp/partner-api-dat:/data/db
+      - /tmp/partner-api-data:/data/db
   # api:
   #   build: .
   #   ports: 
