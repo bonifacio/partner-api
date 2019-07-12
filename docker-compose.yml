@@ -3,15 +3,14 @@ version: '3.7'
 services: 
   mongo:
     image: mongo:latest
-    ports: 
-      - 27017:27017
     volumes: 
       - /tmp/partner-api-data:/data/db
-  # api:
-  #   build: .
-  #   ports: 
-  #     - 8080:8080
-  #   environment: 
-  #     - ENV_MONGO_HOST=mongo
-  #   depends_on: 
-  #     - mongo
+  api:
+    build: .
+    ports: 
+      - 8080:8080
+    environment: 
+      - ENV_MONGO_HOST=mongo
+    depends_on: 
+      - mongo
+    restart: always

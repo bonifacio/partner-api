@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       database: partner
-#      host: ${ENV_MONGO_HOST:#{127.0.0.1}}
+      host: ${ENV_MONGO_HOST}
 graphql:
   spqr:
     gui:

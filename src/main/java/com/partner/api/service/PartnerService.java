@@ -11,6 +11,7 @@ import com.partner.api.repository.PartnerRepository;
 import org.bson.Document;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,12 @@ public class PartnerService {
 	private PartnerRepository partnerRepository;
 
 	private ModelMapper modelMapper;
+	
+	@Value("${spring.data.mongodb.host}")
+	private String mongoHost;
+	
+	@Value("${spring.data.mongodb.database}")
+	private String mongoDb;
 
 	@Autowired
 	public PartnerService(PartnerRepository partnerRepository, ModelMapper modelMapper) {
@@ -36,8 +43,8 @@ public class PartnerService {
 	@PostConstruct
 	public void postConstruct() {
 
-		MongoClient mongoClient = new MongoClient();
-		MongoDatabase db = mongoClient.getDatabase("partner");
+		MongoClient mongoClient = new MongoClient(mongoHost);
+		MongoDatabase db = mongoClient.getDatabase(mongoDb);
 		MongoCollection<Document> collection = db.getCollection("pdv");
 		collection.createIndex(Indexes.geo2dsphere("address"));
 	}
